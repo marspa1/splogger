@@ -9,6 +9,7 @@ Reviderad   2020-08-12 (loggningsfunktionen fungerar)
             2021-01-05 (multipel loggning och initieringfil implementerade)
 
 Att göra:
+* Konvertera gamla strängformat till fstring.
 * Logga mer sällan, samla data i matris för att sedan spara
     t ex en gång per 10 minuter.
 * Använd interrupt för loggningen av data respektive instrumentparametrar
