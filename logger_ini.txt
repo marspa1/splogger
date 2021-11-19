@@ -1,0 +1,19 @@
+# Detta är en initeringsfil med variabler för olika program/instrument. Respektive parametrar är samlade under respektive rubrik. Avslutas med en tom rad (\n).
+# Encoding has to be utf-8!
+
+[NOx CLD700]
+saveFile = NOxDAdata1.csv
+saveFileM = NOxDAinstrumentData1.csv
+# Sample interval for concentration data
+sample_time = 3
+# Sample interval for instr status data max 1 hour (3600 s)!
+sample_time_M = 600
+avg_enable = False
+avg_time = 60
+
+[Fidas 200]
+saveFile = FidasMV4data1.csv
+savefileM = FidasMV4instrumentData1.csv
+sample_time = 10
+avg_enable = False
+avg_time = 60
