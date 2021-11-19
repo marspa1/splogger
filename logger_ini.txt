@@ -17,3 +17,4 @@ savefileM = FidasMV4instrumentData1.csv
 sample_time = 10
 avg_enable = False
 avg_time = 60
+ 
