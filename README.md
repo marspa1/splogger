@@ -1,2 +1,2 @@
 # splogger
-Simple logger for RPi
+Simple logger for RPi (Simple Pi LOGGER)
