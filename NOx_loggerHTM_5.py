@@ -19,6 +19,7 @@ ok Läsa felkoder
 * Larma vid felkoder (mail?)
 * Subrutin för att släcka felkoder och starta om instrumentet
 * Användargränssnitt
+* Dela upp i instrumentkommunikationsrutiner i klasser för olika instrument.
 
 '''
 
@@ -103,7 +104,7 @@ def getNOxData(cmdStr='RD3'):       # EcoPhysics CLD 700 AL
         fel += 1
         return -999, -999, -999
 
-def getNOxinstrumentData():
+def getNOxinstrumentData():   # To do: rewrite w tuples (cmd:len)
     cmdStr = 'RS'                   # Report instrument status (3x2 bytes: ds (bin), ee (asc), ww (asc))
     strLen = 13
     sendNOxCommand(cmdStr)
@@ -144,7 +145,8 @@ def getNOxinstrumentData():
     try:
         # To do: check error codes (p 70)
         if instr_stat[1] != 0x40:                               # Error code (0x40 = @ = no errors)
-            print('Error code: {:08b}'.format(instr_stat[1]))   # Print in binary
+            # old: print('Error code: {:08b}'.format(instr_stat[1]))  Line below not tested!
+            print(f"Error code: {instr_stat[1]:08b}")           # Print in binary
         
         ## Start to form the datastring
         # Instrument status
@@ -282,12 +284,13 @@ try:
                         t = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                         s = int(t[14:16]) * 60 + int(t[17:19])      # Number of seconds on the hour
                         
-                        printstr = "{}, {}, {}, {}, {}".format(t, conc[0], conc[1], conc[2], inlet)
+                        # old: printstr = "{}, {}, {}, {}, {}".format(t, conc[0], conc[1], conc[2], inlet)
+                        printstr = f"{t}, {conc[0]}, {conc[1]}, {conc[2]}, {inlet}"         # undtested
                         print(printstr)
                         printstr += '\r\n'                          # Add rowendings
                         csvfile.write(printstr)
 
-                        if s % sample_time_M == 0:                  # Test the time for sample_time_M
+                        if s % sample_time_M == 0:                  # Test the time for sample_time_M;  To do: work with timers and intrerrupts instead of polling?
                             data = getNOxinstrumentData()           # Instrument parameters
                             printstr = '{}, {}'.format(t, data)
                             print(printstr)
